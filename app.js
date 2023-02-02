@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/contacts", contactsRouter);
 app.use("/api/users", usersRouter);
 
-app.use((_, res) => {
+app.use((_req, res) => {
   res.status(404).json({
     status: "error",
     code: 404,
@@ -26,7 +26,7 @@ app.use((_, res) => {
   });
 });
 
-app.use((err, _, res, __) => {
+app.use((err, _req, res) => {
   console.log(err.stack);
   res.status(500).json({
     status: "fail",
