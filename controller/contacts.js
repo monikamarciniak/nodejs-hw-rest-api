@@ -1,11 +1,19 @@
 const service = require("../service/contacts.js");
+const { Contact } = require("../service/schemas/contact.js");
+
 const getAll = async (req, res, next) => {
-    try {
-        const results = await service.getAll();
-        res.status(200).json(results);
-    } catch (err) {
-        console.error(err.message);
-        next(err);
+  try {
+    let results = await service.getAll({});
+    if (req.query.favorite === "true") {
+      results = await service.getAll({ favorite: req.query.favorite });
+    }
+    if (req.query.favorite === "false") {
+      results = await service.getAll({ favorite: false });
+    }
+    res.status(200).json(results);
+  } catch (err) {
+    console.error(err.message);
+    next(err);
     }
 };
 
