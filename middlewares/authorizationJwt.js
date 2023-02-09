@@ -17,9 +17,7 @@ passport.use(
     try {
       const user = await service.getUserById(payload.id);
       if (!user) return done(new Error("User not found"));
-      if (user) {
-        return done(null, user);
-      }
+      if (user) return done(null, user);
     } catch (err) {
       return done(err);
     }
@@ -31,9 +29,8 @@ const auth = (req, res, next) => {
     if (!req.headers.authorization)
       return res.status(401).json({ message: "Not authorized" });
     const token = req.headers.authorization.slice(7);
-    if (token !== user.token || !user || err) {
+    if (token !== user.token || !user || err) 
       return res.status(401).json({ message: "Not authorized" });
-    }
     req.user = user;
     next();
   })(req, res, next);

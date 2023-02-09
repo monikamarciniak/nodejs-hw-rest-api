@@ -1,10 +1,12 @@
 const { Contact } = require("./schemas/contact.js");
 
-const getAll = async () => Contact.find();
+const getAll = async (body) => Contact.find(body);
 const getContact = async (contactId) => Contact.findById(contactId);
+
 const createContact = async (body) => Contact.create(body);
 const update = async (contactId, fields) =>
-    Contact.findByIdAndUpdate(contactID, fields, { new: true });
+  Contact.findByIdAndUpdate(contactId, fields, { new: true });
+    
 const removeContact = async (contactId) => Contact.findByIdAndDelete(contactId);
 const updateStatusContact = (contactId, body) =>
     Contact.findByIdAndUpdate(contactId, body, { new: true });
