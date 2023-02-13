@@ -7,7 +7,7 @@ const sendMail = async (email, vfToken) => {
 
   const url = `http://localhost:3000/api/users/verify/${vfToken}`;
   const msg = {
-    to: "monixxa90@gmail.com",
+    to: email,
     from: "monixxa90@gmail.com",
     subject: "Verification",
     text: `Your verification token: ${url}`,
